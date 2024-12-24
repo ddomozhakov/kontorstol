@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import ru.dwe.kontorstol.lager.service.LagerService;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,16 +26,15 @@ class LagerApplicationTests {
 	@Autowired
 	private MockMvc mockMvc;
 
-//	@MockBean
-//	private SomeService service;
+	@Autowired
+	private LagerService lagerService;
 
 	@Test
 	void shouldReturnDefaultMessage() throws Exception {
 		this.mockMvc.perform(get(LAGER_GET_ITEMS_AMOUNT_URL)).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString("itemsAmount\":10")));
 	}
-
-
+	
 //	@Test
 //	void greetingShouldReturnMessageFromService() throws Exception {
 //		when(service.greet()).thenReturn("Hello, Mock");
