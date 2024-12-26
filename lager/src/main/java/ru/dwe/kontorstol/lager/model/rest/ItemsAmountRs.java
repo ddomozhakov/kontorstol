@@ -1,4 +1,4 @@
-package ru.dwe.kontorstol.lager.model;
+package ru.dwe.kontorstol.lager.model.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

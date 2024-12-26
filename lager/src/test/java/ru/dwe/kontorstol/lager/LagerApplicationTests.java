@@ -1,18 +1,22 @@
 package ru.dwe.kontorstol.lager;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.dwe.kontorstol.lager.service.LagerService;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,19 +31,18 @@ class LagerApplicationTests {
 	private MockMvc mockMvc;
 
 	@Autowired
-	private LagerService lagerService;
+	private ObjectMapper objectMapper;
 
 	@Test
-	void shouldReturnDefaultMessage() throws Exception {
-		this.mockMvc.perform(get(LAGER_GET_ITEMS_AMOUNT_URL)).andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString("itemsAmount\":10")));
-	}
-	
-//	@Test
-//	void greetingShouldReturnMessageFromService() throws Exception {
-//		when(service.greet()).thenReturn("Hello, Mock");
-//		this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
-//				.andExpect(content().string(containsString("Hello, Mock")));
-//	}
+	void getChairsAmount() throws Exception {
+		Resource resource = new ClassPathResource("json/rq/getChairsAmount.json");
+		String rq = new String(resource.getInputStream().readAllBytes());
 
+		this.mockMvc.perform(get(LAGER_GET_ITEMS_AMOUNT_URL)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(rq))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("itemsAmount\":11")));
+	}
 }
