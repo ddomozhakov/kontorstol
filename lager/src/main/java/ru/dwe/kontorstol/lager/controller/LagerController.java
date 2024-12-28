@@ -1,8 +1,8 @@
 package ru.dwe.kontorstol.lager.controller;
 
-import ru.dwe.kontorstol.lager.model.rest.ItemsAmountRq;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.dwe.kontorstol.lager.model.rest.ItemsAmountRs;
 
 public interface LagerController {
-    ItemsAmountRs getItemsAmount(ItemsAmountRq rq);
+    ItemsAmountRs getItemsAmount(@RequestParam(required = true) String type);
 }
