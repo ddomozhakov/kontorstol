@@ -14,7 +14,15 @@ public class ItemsAmountDao {
     private static final String PASS = "pam";
     private final JdbcTemplate jdbcTemplate;
 
-    public ItemsAmountRs getAllUsers(String type) {
+//    public ItemsAmountRs getAllUsers(String type) {
+//        ItemsAmountRs rs = new ItemsAmountRs(0);
+//
+//        String sql = "SELECT Amount FROM lager_main WHERE Type = ?";
+//        rs.setItemsAmount(jdbcTemplate.queryForObject(sql, new Object[]{type}, Integer.class));
+//        return rs;
+//    }
+
+    public ItemsAmountRs getItemsAmount(String type) {
         ItemsAmountRs rs = new ItemsAmountRs(0);
 
         String sql = "SELECT Amount FROM lager_main WHERE Type = ?";
