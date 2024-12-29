@@ -13,7 +13,7 @@ public class LagerServiceImpl implements LagerService {
     ItemsAmountDao itemsAmountDao;
 
     public ItemsAmountRs getItemsAmount(String type) {
-        return itemsAmountDao.getItemsAmount(type);
+        return itemsAmountDao.getAllUsers(type);
     }
 }
 
