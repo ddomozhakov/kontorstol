@@ -10,8 +10,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemsAmountRq {
+public class CreateItemRq {
 
     @JsonProperty("type")
     private String type;
+
+    @JsonProperty("amount")
+    private int amount;
 }

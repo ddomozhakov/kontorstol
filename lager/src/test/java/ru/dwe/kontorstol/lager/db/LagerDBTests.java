@@ -18,17 +18,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureEmbeddedDatabase(provider = ZONKY)
-class LagerDBTests {
-
+class
+LagerDBTests {
 	private static final String BASE_LOCAL_URL = "http://localhost:8080/";
 	private static final String LAGER_BASE_URL = "api/v1/lager";
 	private static final String LAGER_GET_ITEMS_AMOUNT_ENDPOINT_URL = "/items";
-	private static final String LAGER_GET_ITEMS_AMOUNT_URL = BASE_LOCAL_URL + LAGER_BASE_URL + LAGER_GET_ITEMS_AMOUNT_ENDPOINT_URL;
+	private static final String LAGER_BASE_ITEMS_AMOUNT_URL = BASE_LOCAL_URL + LAGER_BASE_URL + LAGER_GET_ITEMS_AMOUNT_ENDPOINT_URL;
 	private static final String LAGER_SQL_INIT_SUCCESS = "/sql/getItemsAmountSuccess.sql";
 
 	@Autowired
@@ -40,7 +38,7 @@ class LagerDBTests {
 		Resource resource = new ClassPathResource("json/rq/getChairsAmount.json");
 		String rq = new String(resource.getInputStream().readAllBytes());
 
-		this.mockMvc.perform(get(LAGER_GET_ITEMS_AMOUNT_URL + "?type=chair"))
+		this.mockMvc.perform(get(LAGER_BASE_ITEMS_AMOUNT_URL + "/get?type=chair"))
 				.andExpect(status().isOk())
 				.andExpect(content().string(containsString("itemsAmount\":11")))
 				.andDo(print());
@@ -53,7 +51,7 @@ class LagerDBTests {
 		Resource resource = new ClassPathResource("json/rq/getChairsAmount.json");
 		String rq = new String(resource.getInputStream().readAllBytes());
 
-		this.mockMvc.perform(get(LAGER_GET_ITEMS_AMOUNT_URL + "?type=onion"))
+		this.mockMvc.perform(get(LAGER_BASE_ITEMS_AMOUNT_URL + "/get?type=onion"))
 				.andExpect(status().isOk())
 				.andExpect(content().string(containsString("itemsAmount\":11")))
 				.andDo(print());

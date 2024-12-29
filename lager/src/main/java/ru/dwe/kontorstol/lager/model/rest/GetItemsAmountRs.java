@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ItemsAmountRs {
+public class GetItemsAmountRs {
     private int itemsAmount;
 }
