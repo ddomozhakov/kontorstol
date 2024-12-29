@@ -3,6 +3,7 @@ package ru.dwe.kontorstol.lager.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.dwe.kontorstol.lager.model.db.ItemsAmountDao;
+import ru.dwe.kontorstol.lager.model.rest.ItemsAmountRq;
 import ru.dwe.kontorstol.lager.model.rest.ItemsAmountRs;
 import ru.dwe.kontorstol.lager.service.LagerService;
 
@@ -12,8 +13,12 @@ public class LagerServiceImpl implements LagerService {
     @Autowired
     ItemsAmountDao itemsAmountDao;
 
-    public ItemsAmountRs getItemsAmount(String type) {
-        return itemsAmountDao.getAllUsers(type);
+    public ItemsAmountRs getItemsAmount(ItemsAmountRq rq) {
+
+
+
+
+        return itemsAmountDao.getAllUsers(rq);
     }
 }
 
