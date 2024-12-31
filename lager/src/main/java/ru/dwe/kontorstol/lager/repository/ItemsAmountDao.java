@@ -16,22 +16,23 @@ public class ItemsAmountDao {
 
     public void createItem(String type, int amount) {
         String query = "INSERT INTO lager_main (Type, Amount) VALUES (?, ?)";
-        jdbcTemplate.queryForObject(query, new Object[]{type, amount}, Integer.class);
+        jdbcTemplate.update(query, new Object[]{type, amount});
     }
 
     public GetItemsAmountRs getItemsAmount(String type) {
         String query = "SELECT Amount FROM lager_main WHERE Type = ?";
-        return new GetItemsAmountRs(jdbcTemplate.queryForObject(query, new Object[]{type}, Integer.class));
+        Integer amount = jdbcTemplate.queryForObject(query, new Object[]{type}, Integer.class);
+        return new GetItemsAmountRs(amount);
     }
 
     public void updateItemsAmount(String type, int amount) {
-        String query = "UPDATE lager_main SET Amount = ? WHERE Type = ?;";
-        jdbcTemplate.queryForObject(query, new Object[]{type}, Integer.class);
+        String query = "UPDATE lager_main SET Amount = ? WHERE Type = ?";
+        jdbcTemplate.update(query, amount, type);
     }
 
     public void deleteItem(String type) {
         String query = "DELETE FROM lager_main WHERE Type = ?;";
-        jdbcTemplate.queryForObject(query, new Object[]{type}, Integer.class);
+        jdbcTemplate.update(query, type);
     }
 
     // TODO добавить ветку develop и оформлять MR в нее
@@ -39,6 +40,15 @@ public class ItemsAmountDao {
     // TODO добавить логирование>
     // TODO добавить интесепторы и валидаторы с feign
     // TODO покрыть тестами CRUD для ItemsAmountDao
-    // TODO удалить лишние классы и тестовые файлы
     // TODO проверить покрытие тестами
 }
+
+
+//@Value("${db.url}")
+//private String dbUrl;
+//
+//@Value("${db.user}")
+//private String user;
+//
+//@Value("${db.password}")
+//private String password;

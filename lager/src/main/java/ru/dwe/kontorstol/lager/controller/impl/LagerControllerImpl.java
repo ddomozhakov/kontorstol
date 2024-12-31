@@ -21,12 +21,12 @@ public class LagerControllerImpl implements LagerController {
     }
 
     @PostMapping("/items/create")
-    public void createItem(CreateItemRq rq) {
+    public void createItem(@RequestBody CreateItemRq rq) {
         studentServiceImpl.createItem(rq);
     }
 
     @PostMapping("/items/update")
-    public void updateItemsAmount(UpdateItemRq rq) {
+    public void updateItemsAmount(@RequestBody UpdateItemRq rq) {
         studentServiceImpl.updateItemsAmount(rq);
     }
 
@@ -34,5 +34,4 @@ public class LagerControllerImpl implements LagerController {
     public void deleteItem(@RequestParam(required = true) String type) {
         studentServiceImpl.deleteItem(type);
     }
-
 }
