@@ -37,10 +37,8 @@ public class ItemsAmountDao {
 
     // TODO добавить ветку develop и оформлять MR в нее
     // TODO добавить исключения и AdviceController
-    // TODO добавить логирование>
+    // TODO добавить логирование
     // TODO добавить интесепторы и валидаторы с feign
-    // TODO покрыть тестами CRUD для ItemsAmountDao
-    // TODO проверить покрытие тестами
 }
 
 
