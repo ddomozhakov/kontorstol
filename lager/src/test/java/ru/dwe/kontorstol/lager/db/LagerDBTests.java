@@ -39,8 +39,6 @@ class LagerDBTests {
 	@Autowired
 	private ItemsAmountDao itemsAmountDao;
 
-
-
 	@Sql(LAGER_SQL_INIT_SUCCESS)
 	@Test
 	void getChairsAmountSuccess() throws Exception {
