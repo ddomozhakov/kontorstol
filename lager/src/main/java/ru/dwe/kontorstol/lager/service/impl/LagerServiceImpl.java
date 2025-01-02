@@ -1,5 +1,7 @@
 package ru.dwe.kontorstol.lager.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,8 +11,6 @@ import ru.dwe.kontorstol.lager.model.rest.GetItemsAmountRs;
 import ru.dwe.kontorstol.lager.model.rest.UpdateItemRq;
 import ru.dwe.kontorstol.lager.repository.ItemsAmountDao;
 import ru.dwe.kontorstol.lager.service.LagerService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Service
 public class LagerServiceImpl implements LagerService {
@@ -45,16 +45,3 @@ public class LagerServiceImpl implements LagerService {
         logger.info("Заспрос {} успешно обработан", BusinessProcess.DELETEITEM);
     }
 }
-
-//create table lager_main
-//        ( Type varchar primary key,
-//          Amount integer
-//        );
-//
-//
-//insert into lager_main (Type, Amount) values
-//('Table', 15),
-//        ('Chair', 11);
-//
-//
-//select * from lager_main

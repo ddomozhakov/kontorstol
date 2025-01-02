@@ -1,7 +1,6 @@
 package ru.dwe.kontorstol.lager.db;
 
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -48,13 +47,11 @@ class LagerDBTests {
 				.andDo(print());
 	}
 
-	@Disabled
 	@Sql(LAGER_SQL_INIT_SUCCESS)
 	@Test
 	void getChairsAmountNoItem() throws Exception {
 		this.mockMvc.perform(get(LAGER_BASE_ITEMS_AMOUNT_URL + "/get?type=onion"))
-				.andExpect(status().isOk())
-				.andExpect(content().string(containsString("itemsAmount\":11")))
+				.andExpect(status().is5xxServerError())
 				.andDo(print());
 	}
 
@@ -88,11 +85,30 @@ class LagerDBTests {
 
 	@Sql(LAGER_SQL_INIT_SUCCESS)
 	@Test
+	void updateItemAmountNoItem() throws Exception {
+		Resource resource = new ClassPathResource("json/rq/updateItemFail.json");
+		String rq = new String(resource.getInputStream().readAllBytes());
+
+		this.mockMvc.perform(post(LAGER_BASE_ITEMS_AMOUNT_URL + "/update")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(rq))
+				.andExpect(status().is5xxServerError())
+				.andDo(print());
+	}
+
+	@Sql(LAGER_SQL_INIT_SUCCESS)
+	@Test
 	void deleteItemtSuccess() throws Exception {
 		this.mockMvc.perform(delete(LAGER_BASE_ITEMS_AMOUNT_URL + "/delete?type=chair"))
 				.andExpect(status().isOk())
 				.andDo(print());
 	}
 
-
+	@Sql(LAGER_SQL_INIT_SUCCESS)
+	@Test
+	void deleteItemtNoItem() throws Exception {
+		this.mockMvc.perform(delete(LAGER_BASE_ITEMS_AMOUNT_URL + "/delete?type=onion"))
+				.andExpect(status().is5xxServerError())
+				.andDo(print());
+	}
 }
